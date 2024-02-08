@@ -1,5 +1,51 @@
+/* header */
+
 .header__title {
     font-weight: bold;
     font-size: 2rem;
     margin: 1rem 0 0 1rem;
+}
+
+.header__search-container {
+    display: flex;
+    align-items: stretch;
+    margin: 1rem;
+    gap: 0.5rem;
+}
+
+.header__search-input {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-background);
+    flex: 1;
+    font-size: 1rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    border-radius: 0.3125rem;
+}
+
+.search-input__pokemon-name {
+    border: none;
+    flex: 1;
+    background-color: transparent;
+    outline-width: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+.header__search-button button {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.3125rem;
+    height: 100%;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0 0.825rem;
+    background-color: var(--button-color);
+    transition: background-color 300ms ease-in-out;
+}
+
+.header__search-button button:hover {
+    background-color: var(--button-color-hover);
 }

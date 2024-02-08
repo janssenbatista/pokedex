@@ -8,6 +8,25 @@
   <body>
     <header class="header">
       <h1 class="header__title">Pokedex</h1>
+      <section class="header__search-container">
+        <div class="header__search-input">
+          <img
+            class="search-input__icon"
+            src="./src/assets/images/search-icon.svg"
+            alt="ícone de busca"
+          />
+          <input
+            class="search-input__pokemon-name"
+            type="text"
+            name="pokemon-name-input"
+            id="pokemon-name-input"
+            placeholder="Pesquisar por nome ou número"
+          />
+        </div>
+        <div class="header__search-button">
+          <button type="button">Buscar</button>
+        </div>
+      </section>
     </header>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>

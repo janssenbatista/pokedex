@@ -52,3 +52,9 @@ table {
 body {
 	font-family: 'Roboto', sans-serif;
 }
+
+:root {
+	--input-background: #f2f2f2;
+	--button-color:#EA5D60;
+	--button-color-hover:#bb2e31;
+}
