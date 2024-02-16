@@ -102,3 +102,51 @@
     display: flex;
     gap: 0.5rem;
 }
+
+/* error-dialog */
+.error-dialog {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.message-container__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.message-container__button {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.3125rem;
+    height: 100%;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.5rem;
+    background-color: var(--button-color);
+    transition: background-color 300ms ease-in-out;
+    align-self: flex-end;
+}
+
+.message-container__button:hover {
+    background-color: var(--button-color-hover);
+}

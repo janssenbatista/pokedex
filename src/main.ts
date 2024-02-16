@@ -2,6 +2,8 @@ import "./style.css";
 import "./assets/css/home.css";
 import { Pokemon } from "../src/repositories/pokemon.repository";
 
+const application = document.querySelector(".application") as HTMLBodyElement;
+
 function createPokemonCard(pokemon: Pokemon): HTMLElement {
   // pokemon-card
   const pokemonCard = document.createElement("div") as HTMLDivElement;
@@ -50,6 +52,34 @@ function createPokemonCard(pokemon: Pokemon): HTMLElement {
   pokemonCard.appendChild(pokemonCardInfos);
 
   return pokemonCard;
+}
+
+function createErrorDialog(): HTMLElement {
+  const errorDialog = document.createElement("div") as HTMLDivElement;
+  errorDialog.classList.add("error-dialog");
+
+  const messageContainer = document.createElement("div") as HTMLDivElement;
+  messageContainer.classList.add("message-container");
+
+  const messageContainerTitle = document.createElement(
+    "p"
+  ) as HTMLParagraphElement;
+  messageContainerTitle.classList.add("message-container__title");
+  messageContainerTitle.textContent = "Pokemon não encontrado";
+  messageContainer.appendChild(messageContainerTitle);
+
+  const messageContainerButton = document.createElement(
+    "button"
+  ) as HTMLButtonElement;
+  messageContainerButton.classList.add("message-container__button");
+  messageContainerButton.textContent = "Fechar";
+  messageContainer.addEventListener("click", () => {
+    application.removeChild(errorDialog);
+  });
+  messageContainer.appendChild(messageContainerButton);
+
+  errorDialog.appendChild(messageContainer);
+  return errorDialog;
 }
 
 function capitalizeWord(word: string): string {
