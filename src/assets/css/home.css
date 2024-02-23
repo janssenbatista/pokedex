@@ -150,3 +150,114 @@
 .message-container__button:hover {
     background-color: var(--button-color-hover);
 }
+
+/* pokemon-dialog */
+
+.pokemon-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon-details {
+    background-color: var(--background-type-grass);
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+}
+
+.pokemon-details__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.825rem;
+}
+
+.pokemon-details__top__image {
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+}
+
+.pokemon-details__top__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.pokemon-details__top__infos__number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.pokemon-details__top__infos__name {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: white;
+}
+
+.pokemon-details__top__infos__types {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pokemon-details__bottom {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pokemon-details__bottom .title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.pokemon-details__bottom__infos {
+    background-color: white;
+    width: 95%;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.25rem;
+}
+
+.pokemon-details__bottom__infos__abilities {
+    display: flex;
+    flex-direction: column;
+}
+
+.key {
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.value {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.825rem;
+}
+
+.hidden-ability {
+    font-size: 0.75rem;
+}
+
+.pokemon-details__bottom__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+    justify-items: flex-start;
+    align-items: center;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}

@@ -82,6 +82,183 @@ function createErrorDialog(): HTMLElement {
   return errorDialog;
 }
 
+function createPokemonDialog(pokemon: Pokemon): HTMLElement {
+  // pokemon-dialog
+  const pokemonDialog = document.createElement("div") as HTMLDivElement;
+  pokemonDialog.classList.add("pokemon-dialog");
+
+  // pokemon-details
+  const pokemonDetails = document.createElement("div") as HTMLDivElement;
+  pokemonDetails.classList.add("pokemon-details");
+
+  // pokemon-details__top
+  const pokemonDetailsTop = document.createElement("div") as HTMLDivElement;
+  pokemonDetailsTop.classList.add("pokemon-details__top");
+
+  // pokemon-details__top__image
+  const pokemonDetailsTopImage = document.createElement(
+    "img"
+  ) as HTMLImageElement;
+  pokemonDetailsTopImage.classList.add("pokemon-details__top__image");
+  pokemonDetailsTopImage.src = pokemon.sprites.other.dream_world.front_default;
+  pokemonDetailsTopImage.alt = pokemon.name;
+  pokemonDetailsTop.appendChild(pokemonDetailsTopImage);
+
+  // pokemon-details__top__infos
+  const pokemonDetailsTopInfos = document.createElement(
+    "div"
+  ) as HTMLDivElement;
+  pokemonDetailsTopInfos.classList.add("pokemon-details__top__infos");
+
+  // pokemon-details__top__infos__number
+  const pokemonInfosNumber = document.createElement("div") as HTMLDivElement;
+  pokemonInfosNumber.classList.add("pokemon-details__top__infos__number");
+  pokemonInfosNumber.textContent = `#${pokemon.id.toString().padStart(3, "0")}`;
+  pokemonDetailsTopInfos.appendChild(pokemonInfosNumber);
+
+  // pokemon-details__top__infos__name
+  const pokemonInfosName = document.createElement("div") as HTMLDivElement;
+  pokemonInfosName.classList.add("pokemon-details__top__infos__name");
+  pokemonInfosName.textContent = capitalizeWord(pokemon.name);
+  pokemonDetailsTopInfos.appendChild(pokemonInfosName);
+
+  // pokemon-details__top__infos__types
+  const pokemonInfosTypes = document.createElement("div") as HTMLDivElement;
+  pokemonInfosTypes.classList.add("pokemon-details__top__infos__types");
+
+  pokemon.types.forEach((type) => {
+    const img = document.createElement("img") as HTMLImageElement;
+    img.src = `src/assets/images/pokemon-types/${type.type.name}.svg`;
+    img.alt = `type ${type.type.name}`;
+    pokemonInfosTypes.appendChild(img);
+  });
+  pokemonDetailsTopInfos.appendChild(pokemonInfosTypes);
+  pokemonDetailsTop.appendChild(pokemonDetailsTopInfos);
+  pokemonDetails.appendChild(pokemonDetailsTop);
+
+  // pokemon details bottom
+  const detailsBottom = document.createElement("div") as HTMLDivElement;
+  detailsBottom.classList.add("pokemon-details__bottom");
+
+  // about title
+  const aboutTitle = document.createElement("p") as HTMLParagraphElement;
+  aboutTitle.classList.add("title");
+  aboutTitle.textContent = "Sobre";
+  detailsBottom.appendChild(aboutTitle);
+
+  // details bottom infos
+  const detailsBottomInfos = document.createElement("div") as HTMLDivElement;
+  detailsBottomInfos.classList.add("pokemon-details__bottom__infos");
+  // height
+  const pokemonHeight = document.createElement("span") as HTMLSpanElement;
+  pokemonHeight.classList.add("key");
+  pokemonHeight.textContent = "Altura";
+  detailsBottomInfos.appendChild(pokemonHeight);
+  // height value
+  const pokemonHeightValue = document.createElement("span") as HTMLDivElement;
+  pokemonHeightValue.classList.add("value");
+  pokemonHeightValue.textContent = `${pokemon.height * 10} centímetros`;
+  detailsBottomInfos.appendChild(pokemonHeightValue);
+  // weigth
+  const pokemonWeight = document.createElement("span") as HTMLSpanElement;
+  pokemonWeight.classList.add("key");
+  pokemonWeight.textContent = "Peso";
+  detailsBottomInfos.appendChild(pokemonWeight);
+  // weigth value
+  const pokemonWeightValue = document.createElement("span") as HTMLDivElement;
+  pokemonWeightValue.classList.add("value");
+  pokemonWeightValue.textContent = `${pokemon.weight * 0.1} quilos`;
+  detailsBottomInfos.appendChild(pokemonWeightValue);
+  // abilities
+  const pokemonAbilities = document.createElement("span") as HTMLSpanElement;
+  pokemonAbilities.classList.add("key");
+  pokemonAbilities.textContent = "Habilidades";
+  detailsBottomInfos.appendChild(pokemonAbilities);
+  // abilities values
+  const pokemonAbilitiesValues = document.createElement(
+    "div"
+  ) as HTMLDivElement;
+  pokemonAbilitiesValues.classList.add(
+    "pokemon-details__bottom__infos__abilities"
+  );
+  pokemon.abilities.forEach((ability) => {
+    const value = document.createElement("span") as HTMLSpanElement;
+    value.classList.add("value");
+    if (ability.is_hidden) {
+      value.classList.add("hidden-ability");
+      value.textContent = ability.ability.name + " (escondida)";
+    } else {
+      value.textContent = ability.ability.name;
+    }
+    pokemonAbilitiesValues.appendChild(value);
+  });
+  detailsBottomInfos.appendChild(pokemonAbilitiesValues);
+  detailsBottom.appendChild(detailsBottomInfos);
+
+  // statistics
+  const pokemonStatistics = document.createElement("p") as HTMLParagraphElement;
+  pokemonStatistics.classList.add("title");
+  pokemonStatistics.textContent = "Estatísticas";
+  detailsBottom.appendChild(pokemonStatistics);
+
+  // bottom stats
+  const detailsBottomStats = document.createElement("div") as HTMLDivElement;
+  detailsBottomStats.classList.add("pokemon-details__bottom__stats");
+
+  pokemon.stats.forEach((statistic) => {
+    const statName = document.createElement("span") as HTMLSpanElement;
+    statName.classList.add("key");
+    statName.textContent = `${translateStatistic(statistic.stat.name)} (${
+      statistic.base_stat
+    })`;
+    detailsBottomStats.appendChild(statName);
+    const statValue = document.createElement("progress") as HTMLProgressElement;
+    statValue.value = statistic.base_stat;
+    statValue.max = 100;
+    detailsBottomStats.appendChild(statValue);
+  });
+
+  detailsBottom.appendChild(detailsBottomStats);
+  pokemonDetails.appendChild(detailsBottom);
+  pokemonDialog.appendChild(pokemonDetails);
+
+  return pokemonDialog;
+}
+
 function capitalizeWord(word: string): string {
   return `${word[0].toUpperCase()}${word.substring(1)}`;
+}
+
+function translateStatistic(stat: string): string {
+  let translatedStatistic = "";
+  switch (stat) {
+    case "hp": {
+      translatedStatistic = "HP";
+      break;
+    }
+    case "attack": {
+      translatedStatistic = "Ataque";
+      break;
+    }
+    case "defense": {
+      translatedStatistic = "Defesa";
+      break;
+    }
+    case "special-attack": {
+      translatedStatistic = "Ataque Especial";
+      break;
+    }
+    case "special-defense": {
+      translatedStatistic = "Defesa Especial";
+      break;
+    }
+    case "speed": {
+      translatedStatistic = "Velocidade";
+      break;
+    }
+    default:
+      throw new Error("invalid stat");
+  }
+
+  return translatedStatistic;
 }
