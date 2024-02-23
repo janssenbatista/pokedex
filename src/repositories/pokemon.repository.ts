@@ -89,6 +89,7 @@ export async function getPokemons(
                 name: pokemon.name,
                 sprites: pokemon.sprites,
                 types: pokemon.types,
+                weight: pokemon.weight,
                 stats: pokemon.stats,
                 species: pokemon.species,
               } as Pokemon)
@@ -106,16 +107,20 @@ export async function getPokemonByName(pokemonName: string): Promise<any> {
       }
       return response.data;
     })
-    .then((pokemon) => ({
-      id: pokemon.id,
-      abilities: pokemon.abilities,
-      height: pokemon.height,
-      name: pokemon.name,
-      sprites: pokemon.sprites,
-      types: pokemon.types,
-      stats: pokemon.stats,
-      species: pokemon.species,
-    }));
+    .then(
+      (pokemon) =>
+        ({
+          id: pokemon.id,
+          abilities: pokemon.abilities,
+          height: pokemon.height,
+          name: pokemon.name,
+          sprites: pokemon.sprites,
+          types: pokemon.types,
+          weight: pokemon.weight,
+          stats: pokemon.stats,
+          species: pokemon.species,
+        } as Pokemon)
+    );
 }
 
 export async function getPokemonByNumber(pokemonNumber: number) {
@@ -127,14 +132,18 @@ export async function getPokemonByNumber(pokemonNumber: number) {
       }
       return response.data;
     })
-    .then((pokemon) => ({
-      id: pokemon.id,
-      abilities: pokemon.abilities,
-      height: pokemon.height,
-      name: pokemon.name,
-      sprites: pokemon.sprites,
-      types: pokemon.types,
-      stats: pokemon.stats,
-      species: pokemon.species,
-    }));
+    .then(
+      (pokemon) =>
+        ({
+          id: pokemon.id,
+          abilities: pokemon.abilities,
+          height: pokemon.height,
+          name: pokemon.name,
+          sprites: pokemon.sprites,
+          types: pokemon.types,
+          weight: pokemon.weight,
+          stats: pokemon.stats,
+          species: pokemon.species,
+        } as Pokemon)
+    );
 }
