@@ -1,8 +1,33 @@
 import "./style.css";
 import "./assets/css/home.css";
-import { Pokemon } from "../src/repositories/pokemon.repository";
+import { Pokemon, getPokemons } from "../src/repositories/pokemon.repository";
 
 const application = document.querySelector(".application") as HTMLBodyElement;
+const pokemonListContainer = document.querySelector(".pokemon-list-container");
+
+let pokemons: Pokemon[] = [];
+
+const getPokemonsFunc = async (limit: number = 20, offset: number = 0) => {
+  try {
+    pokemons = await getPokemons(limit, offset);
+    pokemons.forEach((pokemon) => {
+      const pokemonCard = createPokemonCard(pokemon);
+      pokemonCard.addEventListener("click", () => {
+        showPokemonDialog(pokemon);
+      });
+      pokemonListContainer?.appendChild(pokemonCard);
+    });
+  } catch (error: any) {
+    console.error(error.message);
+  }
+};
+
+getPokemonsFunc();
+
+function showPokemonDialog(pokemon: Pokemon) {
+  const pokemonDialog = createPokemonDialog(pokemon);
+  application.appendChild(pokemonDialog);
+}
 
 function createPokemonCard(pokemon: Pokemon): HTMLElement {
   // pokemon-card
@@ -86,6 +111,14 @@ function createPokemonDialog(pokemon: Pokemon): HTMLElement {
   // pokemon-dialog
   const pokemonDialog = document.createElement("div") as HTMLDivElement;
   pokemonDialog.classList.add("pokemon-dialog");
+  pokemonDialog.style.position = "absolute";
+  pokemonDialog.style.top = `${window.scrollY}px`;
+  pokemonDialog.style.left = "0px";
+  application.style.overflow = "hidden";
+
+  pokemonDialog.addEventListener("click", () => {
+    removePokemonDialog(pokemonDialog);
+  });
 
   // pokemon-details
   const pokemonDetails = document.createElement("div") as HTMLDivElement;
@@ -261,4 +294,9 @@ function translateStatistic(stat: string): string {
   }
 
   return translatedStatistic;
+}
+
+function removePokemonDialog(pokemonDialog: HTMLDivElement) {
+  application.style.overflow = "scroll";
+  application.removeChild(pokemonDialog);
 }

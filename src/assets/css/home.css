@@ -58,7 +58,6 @@
     justify-items: center;
     gap: 0.5rem;
     padding: 0 1rem 1rem;
-    cursor: pointer;
 }
 
 .pokemon-card {
@@ -72,6 +71,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .pokemon-card__image img {
@@ -154,9 +154,6 @@
 /* pokemon-dialog */
 
 .pokemon-dialog {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100vw;
     height: 100vh;
     overflow-y: hidden;
