@@ -47,10 +47,10 @@ const getPokemonsFunc = async (
 
 getPokemonsFunc();
 
-const loadMorePokemons = async (limit: number = 20) => {
+const loadMorePokemons = async () => {
   currentOffset = pokemons.length;
   try {
-    const newPokemons = await getPokemons((limit = 20), currentOffset);
+    const newPokemons = await getPokemons(20, currentOffset);
     pokemons = pokemons.concat(newPokemons);
     clearPokemonList();
     pokemons.forEach((pokemon) => {
