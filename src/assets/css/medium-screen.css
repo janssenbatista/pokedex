@@ -1,0 +1,9 @@
+@media screen and (min-width: 768px) {
+    .pokemon-list-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .pokemon-card {
+        max-width: 100%;
+    }
+}
