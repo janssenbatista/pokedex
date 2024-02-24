@@ -1,6 +1,7 @@
 import "./style.css";
 import "./assets/css/home.css";
 import "./assets/css/medium-screen.css";
+import "./assets/css/large-screen.css";
 import {
   Pokemon,
   getPokemons,

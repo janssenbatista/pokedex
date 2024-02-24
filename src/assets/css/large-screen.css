@@ -1,0 +1,10 @@
+@media screen and (min-width: 992px) {
+    .application {
+        max-width: 990px;
+        margin: 0 auto;
+    }
+
+    .pokemon-list-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
