@@ -37,6 +37,7 @@ const getPokemonsFunc = async (
       });
       pokemonListContainer?.appendChild(pokemonCard);
     });
+    loadMoreButton.style.display = "block";
   } catch (error: any) {
     console.error(error.message);
   }

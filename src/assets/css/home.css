@@ -270,4 +270,5 @@
     color: white;
     cursor: pointer;
     margin-bottom: 1rem;
+    display: none;
 }
