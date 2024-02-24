@@ -1,6 +1,11 @@
 import "./style.css";
 import "./assets/css/home.css";
-import { Pokemon, getPokemons } from "../src/repositories/pokemon.repository";
+import {
+  Pokemon,
+  getPokemons,
+  getPokemonByName,
+  getPokemonByNumber,
+} from "../src/repositories/pokemon.repository";
 
 const application = document.querySelector(".application") as HTMLBodyElement;
 const pokemonListContainer = document.querySelector(
@@ -8,6 +13,12 @@ const pokemonListContainer = document.querySelector(
 ) as HTMLDivElement;
 const loadMoreButton = document.querySelector(
   ".load-more-button"
+) as HTMLButtonElement;
+const inputPokemonName = document.querySelector(
+  ".search-input__pokemon-name"
+) as HTMLInputElement;
+const searchButton = document.querySelector(
+  ".search-button"
 ) as HTMLButtonElement;
 
 let pokemons: Pokemon[] = [];
@@ -53,6 +64,24 @@ const loadMorePokemons = async (limit: number = 20) => {
 
 loadMoreButton.addEventListener("click", () => {
   loadMorePokemons();
+});
+
+searchButton.addEventListener("click", async () => {
+  let pokemon: Pokemon;
+  try {
+    if (isNaN(Number.parseInt(inputPokemonName.value))) {
+      pokemon = await getPokemonByName(inputPokemonName.value);
+    } else {
+      pokemon = await getPokemonByNumber(
+        Number.parseInt(inputPokemonName.value)
+      );
+    }
+    const pokemonDialog = createPokemonDialog(pokemon);
+    application.appendChild(pokemonDialog);
+  } catch (error: any) {
+    const errorDialog = createErrorDialog();
+    application.appendChild(errorDialog);
+  }
 });
 
 function showPokemonDialog(pokemon: Pokemon) {

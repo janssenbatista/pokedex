@@ -100,7 +100,7 @@ export async function getPokemons(
 
 export async function getPokemonByName(pokemonName: string): Promise<any> {
   return axios
-    .get(`${BASE_URL}/pokemon/${pokemonName}`)
+    .get(`${BASE_URL}/pokemon/${pokemonName.toLowerCase()}`)
     .then((response) => {
       if (response.status !== 200) {
         throw new Error("Pokemon não encontrado");
