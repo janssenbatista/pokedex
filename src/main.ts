@@ -123,6 +123,7 @@ function createPokemonDialog(pokemon: Pokemon): HTMLElement {
   // pokemon-details
   const pokemonDetails = document.createElement("div") as HTMLDivElement;
   pokemonDetails.classList.add("pokemon-details");
+  pokemonDetails.style.backgroundColor = `var(--background-type-${pokemon.types[0].type.name})`;
 
   // pokemon-details__top
   const pokemonDetailsTop = document.createElement("div") as HTMLDivElement;
@@ -200,7 +201,9 @@ function createPokemonDialog(pokemon: Pokemon): HTMLElement {
   // weigth value
   const pokemonWeightValue = document.createElement("span") as HTMLDivElement;
   pokemonWeightValue.classList.add("value");
-  pokemonWeightValue.textContent = `${pokemon.weight * 0.1} quilos`;
+  pokemonWeightValue.textContent = `${(pokemon.weight * 0.1).toFixed(
+    2
+  )} quilos`;
   detailsBottomInfos.appendChild(pokemonWeightValue);
   // abilities
   const pokemonAbilities = document.createElement("span") as HTMLSpanElement;
