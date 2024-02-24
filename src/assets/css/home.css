@@ -259,28 +259,15 @@
     border-radius: 0.5rem;
 }
 
-/* circle progress bar */
+/* load more button */
 
-.progress-bar-container {
-    display: flex;
-    justify-content: center;
-}
-
-.circle-progress-bar {
-    width: 2rem;
-    height: 2rem;
-    border: 5px solid var(--button-color);
-    border-top: 5px solid lightgray;
-    border-radius: 50%;
+.load-more-button {
+    border: none;
+    border-radius: 0.3125rem;
+    padding: 0.5rem;
+    margin: 0 auto;
+    background-color: var(--button-color);
+    color: white;
+    cursor: pointer;
     margin-bottom: 1rem;
-    animation: rotateAnimation 1s linear infinite;
-}
-
-@keyframes rotateAnimation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }

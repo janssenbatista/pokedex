@@ -3,11 +3,20 @@ import "./assets/css/home.css";
 import { Pokemon, getPokemons } from "../src/repositories/pokemon.repository";
 
 const application = document.querySelector(".application") as HTMLBodyElement;
-const pokemonListContainer = document.querySelector(".pokemon-list-container");
+const pokemonListContainer = document.querySelector(
+  ".pokemon-list-container"
+) as HTMLDivElement;
+const loadMoreButton = document.querySelector(
+  ".load-more-button"
+) as HTMLButtonElement;
 
 let pokemons: Pokemon[] = [];
+let currentOffset: number = 0;
 
-const getPokemonsFunc = async (limit: number = 20, offset: number = 0) => {
+const getPokemonsFunc = async (
+  limit: number = 20,
+  offset: number = currentOffset
+) => {
   try {
     pokemons = await getPokemons(limit, offset);
     pokemons.forEach((pokemon) => {
@@ -23,6 +32,28 @@ const getPokemonsFunc = async (limit: number = 20, offset: number = 0) => {
 };
 
 getPokemonsFunc();
+
+const loadMorePokemons = async (limit: number = 20) => {
+  currentOffset = pokemons.length;
+  try {
+    const newPokemons = await getPokemons((limit = 20), currentOffset);
+    pokemons = pokemons.concat(newPokemons);
+    clearPokemonList();
+    pokemons.forEach((pokemon) => {
+      const pokemonCard = createPokemonCard(pokemon);
+      pokemonCard.addEventListener("click", () => {
+        showPokemonDialog(pokemon);
+      });
+      pokemonListContainer?.appendChild(pokemonCard);
+    });
+  } catch (error: any) {
+    console.error(error.message);
+  }
+};
+
+loadMoreButton.addEventListener("click", () => {
+  loadMorePokemons();
+});
 
 function showPokemonDialog(pokemon: Pokemon) {
   const pokemonDialog = createPokemonDialog(pokemon);
@@ -302,4 +333,10 @@ function translateStatistic(stat: string): string {
 function removePokemonDialog(pokemonDialog: HTMLDivElement) {
   application.style.overflow = "scroll";
   application.removeChild(pokemonDialog);
+}
+
+function clearPokemonList() {
+  while (pokemonListContainer.children.length > 0) {
+    pokemonListContainer.removeChild(pokemonListContainer.children[0]);
+  }
 }
